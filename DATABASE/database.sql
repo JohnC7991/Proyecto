@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS t_usuarios(
     CONSTRAINT uq_email UNIQUE(email)
 ) ENGINE=InnoDb;
 
-INSERT INTO t_usuarios VALUES (NULL,'Admin','Admin', 'admin@admin.com','1234', 'admin','imagen')
+INSERT INTO t_usuarios VALUES (NULL,'Admin','Admin', 'admin@admin.com','1234', 'admin','imagen');
 
 CREATE TABLE IF NOT EXISTS t_categorias(
     id_categoria        int(11) auto_increment  NOT NULL,
@@ -36,5 +36,13 @@ CREATE TABLE IF NOT EXISTS t_productos(
     CONSTRAINT          fk_producto_categoria   FOREIGN KEY(id_categoria) REFERENCES t_categorias(id_categoria)
 )ENGINE=InnoDb;
 
-
+CREATE TABLE IF NOT EXISTS t_pedidos(
+    id_pedido           int(11) auto_increment  NOT NULL,
+    id_usuario          int(11)                 NOT NULL,
+    fecha               date                    NOT NULL,
+    hora                time                    NOT NULL,
+    estado              varchar(50)             NOT NULL,
+    CONSTRAINT          pk_pedido               PRIMARY KEY(id_pedido),
+    CONSTRAINT          fk_pedido_usuario       FOREIGN KEY(id_usuario) REFERENCES t_usuarios(id_usuario)
+)ENGINE=InnoDb;
 
